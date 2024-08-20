@@ -1,6 +1,7 @@
 package sample.cafekiosk.unit;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import sample.cafekiosk.unit.beverage.Americano;
 import sample.cafekiosk.unit.beverage.Latte;
@@ -26,6 +27,7 @@ class CafeKioskTest {
     }
 
     @Test
+    @DisplayName("음료 1개를 추가하면 주문 목록에 담긴다.")
     void add() {
         CafeKiosk cafeKiosk = new CafeKiosk();
         cafeKiosk.add(new Americano());
@@ -82,7 +84,9 @@ class CafeKioskTest {
     }
 
     @Test
+    @DisplayName("주문 목록에 담긴 상품들의 총 금액을 계산할 수 있다.")
     void calculateTotalPrice() {    //테스트 먼저 작성
+        //given
         CafeKiosk cafeKiosk = new CafeKiosk();
         Americano americano = new Americano();
         Latte latte = new Latte();
@@ -90,7 +94,10 @@ class CafeKioskTest {
         cafeKiosk.add(americano);
         cafeKiosk.add(latte);
 
+        //when
         int totalPrice = cafeKiosk.calculateTotalPrice();
+
+        //then
         assertThat(totalPrice).isEqualTo(8500);
     }
 
@@ -106,7 +113,9 @@ class CafeKioskTest {
         assertThat(order.getBeverages().get(0).getName()).isEqualTo("아메리카노");
         //항상 성공하는 테스트는 아니다. 현재 시간을 기준으로 주문시간을 체크하기에 테스트를 시작한 시간에는 통과하지만
         // 주문 시간을 넘어선 시간에 테스트를하면 실패하게된다.
+
     }
+
 
 
     @Test
