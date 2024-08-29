@@ -101,20 +101,20 @@ class CafeKioskTest {
         assertThat(totalPrice).isEqualTo(8500);
     }
 
-    @Test
-    void createOrder() {
-        CafeKiosk cafeKiosk = new CafeKiosk();
-        Americano americano = new Americano();
-
-        cafeKiosk.add(americano);
-
-        Order order = cafeKiosk.createOrderNow();
-        assertThat(order.getBeverages()).hasSize(1);
-        assertThat(order.getBeverages().get(0).getName()).isEqualTo("아메리카노");
-        //항상 성공하는 테스트는 아니다. 현재 시간을 기준으로 주문시간을 체크하기에 테스트를 시작한 시간에는 통과하지만
-        // 주문 시간을 넘어선 시간에 테스트를하면 실패하게된다.
-
-    }
+//    @Test
+//    void createOrder() {
+//        CafeKiosk cafeKiosk = new CafeKiosk();
+//        Americano americano = new Americano();
+//
+//        cafeKiosk.add(americano);
+//
+//        Order order = cafeKiosk.createOrderNow();
+//        assertThat(order.getBeverages()).hasSize(1);
+//        assertThat(order.getBeverages().get(0).getName()).isEqualTo("아메리카노");
+//        //항상 성공하는 테스트는 아니다. 현재 시간을 기준으로 주문시간을 체크하기에 테스트를 시작한 시간에는 통과하지만
+//        // 주문 시간을 넘어선 시간에 테스트를하면 실패하게된다.
+//
+//    }
 
 
 

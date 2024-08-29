@@ -3,6 +3,7 @@ package sample.cafekiosk.spring.api.service.mail;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -73,6 +74,26 @@ class MailServiceTest {
         //given
         when(mailSendClient.sendEmail(anyString(), anyString(), anyString(), anyString()))
                 .thenReturn(true);
+
+        //when
+        boolean result = mailService.sendMail("", "", "", "");
+
+        //then
+        verify(mailSendHistoryRepository, times(1)).save(any(MailSendHistory.class));
+        assertThat(result).isTrue();
+    }
+
+    @DisplayName("메일 전송 테스트 With BDD Mockito")
+    @Test
+    void sendMailWithBDDMockito() {
+        //given
+        MailSendClient mailSendClient = mock(MailSendClient.class);
+        MailSendHistoryRepository mailSendHistoryRepository = mock(MailSendHistoryRepository.class);
+
+        MailService mailService = new MailService(mailSendClient, mailSendHistoryRepository);
+
+        BDDMockito.given(mailSendClient.sendEmail(anyString(), anyString(), anyString(), anyString()))
+                .willReturn(true);
 
         //when
         boolean result = mailService.sendMail("", "", "", "");
